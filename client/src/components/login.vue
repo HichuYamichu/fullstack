@@ -3,7 +3,7 @@
     <v-flex xs6 offset-xs3>
       <div class="secondary">
         <v-toolbar flat dense class="primary" dark>
-          <v-toolbar-title>Register</v-toolbar-title>
+          <v-toolbar-title>Login</v-toolbar-title>
         </v-toolbar>
 				<div class="pl-4 pr-4 pt-4 pb-2">
 					<form autocomplete="off">
@@ -28,8 +28,8 @@
           <br>
           <v-btn
 						class="primary"
-            @click="register">
-            Register
+            @click="login">
+            login
           </v-btn>
         </div>
       </div>
@@ -48,9 +48,9 @@ export default {
     }
   },
 	methods: {
-		async register() {
+		async login() {
 			try{
-				await authenticationService.register({
+				await authenticationService.login({
 					email: this.email,
 					password: this.password
 				})

@@ -1,8 +1,11 @@
 module.exports = (app) => {
-	const registerController = require('./controllers/registerController');
+	const authenticationController = require('./controllers/authenticationController');
 	const registerPolicy = require('./policies/registerPolicy');
 
 	app.post('/register',
 		registerPolicy.register,
-		registerController.register);
+		authenticationController.register);
+
+	app.post('/login',
+		authenticationController.login);
 };
