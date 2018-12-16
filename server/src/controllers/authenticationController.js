@@ -13,11 +13,14 @@ module.exports = {
 		const email = await users.findOne({email: req.body.email});
 		try{
 			if(email) throw 'user already exists';		
-			await users.insertOne({
+			const user = await users.insertOne({
 				email: req.body.email,
 				password: req.body.password
 			});
-			res.send({message: 'it works!'});
+			res.send({
+				token: signUser(user.ops[0]),
+				user: user.ops[0]
+			});
 		}catch(err){
 			res.status(400).send({error: err});
 		}
@@ -35,7 +38,6 @@ module.exports = {
 					error: 'Invalid login info'
 				});
 			}
-
 			const isPasswordValid = password == user.password;
 
 			if(!isPasswordValid){

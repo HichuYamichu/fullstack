@@ -12,10 +12,18 @@
 		</v-toolbar-title>
 		<v-spacer></v-spacer>
 		<v-toolbar-items class="buttons">
-			<v-btn block to="login">login</v-btn>
+			<v-btn 
+				v-if="!$store.state.isUserLoggedIn"
+				block to="login">
+				login
+			</v-btn>
 		</v-toolbar-items>
 		<v-toolbar-items class="buttons">
-			<v-btn block to="register">Sign Up</v-btn>
+			<v-btn
+				v-if="!$store.state.isUserLoggedIn"
+				block to="register">
+				Sign Up
+				</v-btn>
 		</v-toolbar-items>
 	</v-toolbar>
 </template>
