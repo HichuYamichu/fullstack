@@ -1,6 +1,7 @@
 module.exports = (app) => {
 	const authenticationController = require('./controllers/authenticationController');
 	const registerPolicy = require('./policies/registerPolicy');
+	const appsControler = require('./controllers/appsController');
 
 	app.post('/register',
 		registerPolicy.register,
@@ -8,4 +9,7 @@ module.exports = (app) => {
 
 	app.post('/login',
 		authenticationController.login);
+		
+	app.get('/apps',
+		appsControler.index);
 };

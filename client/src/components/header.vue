@@ -10,19 +10,37 @@
         Hichu-Yamichu
       </router-link>
 		</v-toolbar-title>
+		<v-toolbar-items class="buttons">
+			<v-btn
+				v-if="$store.state.isUserLoggedIn"
+				block
+				to="apps">
+				Apps
+				</v-btn>
+		</v-toolbar-items>
 		<v-spacer></v-spacer>
 		<v-toolbar-items class="buttons">
 			<v-btn 
 				v-if="!$store.state.isUserLoggedIn"
-				block to="login">
+				block
+				to="login">
 				login
 			</v-btn>
 		</v-toolbar-items>
 		<v-toolbar-items class="buttons">
 			<v-btn
 				v-if="!$store.state.isUserLoggedIn"
-				block to="register">
+				block
+				to="register">
 				Sign Up
+				</v-btn>
+		</v-toolbar-items>
+		<v-toolbar-items class="buttons">
+			<v-btn
+				v-if="$store.state.isUserLoggedIn"
+				block
+				@click="logout">
+				Log out
 				</v-btn>
 		</v-toolbar-items>
 	</v-toolbar>
@@ -31,7 +49,15 @@
 <script>
 
 export default {
-  
+  methods: {
+		logout(){
+			this.$store.dispatch('setToken', null)
+			this.$store.dispatch('setUser', null)
+			this.$router.push({
+				name: 'root'
+			})
+		}
+	}
 }
 </script>
 
