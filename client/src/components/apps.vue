@@ -8,13 +8,16 @@
 				<v-toolbar-title>{{ app.name }}</v-toolbar-title>
 				<v-spacer></v-spacer>
 				<v-toolbar-items class="buttons">
-					<v-btn
-						block
-						to="apps">
-						LUNCH
-					</v-btn>
+					 <v-btn
+						class="primary"
+            @click="lunchApp">
+            LUNCH
+          </v-btn>
 				</v-toolbar-items>
       </v-toolbar>
+			<div>
+				{{ appContent }}
+			</div>
 		</div>
 	</panel>
 </template>
@@ -22,6 +25,7 @@
 <script>
 import panel from '@/components/panel'
 import fetchApps from '@/services/fetchApps'
+import fetchAppContent from '@/services/fetchAppContent'
 
 export default {
 	components:{
@@ -29,16 +33,25 @@ export default {
 	},
 	data(){
 		return{
-			apps: null
+			apps: null,
+			appContent: null
 		}
 	},
-	// watch:{
-	// 	this.apps = (await fetchApps.index()).data
-	// }
+	methods: {
+		async lunchApp(){
+			this.appContent = (await fetchAppContent.index(3002)).data
+			console.log('clicked')
+		}
+	},
+	watch:{
+		appContent (value){
+			console.log(value);
+		}
+	},
 	async mounted(){
 		this.apps = (await fetchApps.index()).data
 		console.log(this.apps)
-	}
+	},
 }
 </script>
 
